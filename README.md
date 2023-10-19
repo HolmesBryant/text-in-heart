@@ -2,7 +2,7 @@
 
 Renders text inside a heart.
 
-[Demo: https://holmesbryant.github.io/text-in-heart] (https://holmesbryant.github.io/text-in-heart/)
+Demo: (https://holmesbryant.github.io/text-in-heart/)
 
 ## Attributes
 * fill [optional]: The color inside of the shape. "none" for transparent. Any valid css color value is acceptable.
