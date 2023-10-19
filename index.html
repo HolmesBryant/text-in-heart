@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Text In Heart Web Component</title>
+	<script defer type="module" src="text-in-heart.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<p>
+    <details>
+      <summary><h3>Text In Heart Component</h3></summary>
+      <p>
+        Renders text inside a heart.
+      </p>
+      <div>
+        <h3>Attributes</h3>
+        <ul>
+          <li>fill [optional]: The color inside of the shape. "none" for transparent. Any valid css color value is acceptable.</li>
+          <li>stroke [optional]: The color of the line around the shape. "none" for transparent. Any valid css color value is acceptable</li>
+          <li>text [optional]: The text to place inside the shape. This is used primarily for dynamically changing the test with javascript. Normally you just place the text inside the opening and closing tags.
+            <ul>
+              <li>
+                Dynamic text example: customElem.setAttribute('text', 'Some other text.');
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3>Usage</h3>
+          <code>
+            &lt;script defer type="module" src="text-in-heart.js"&gt;&lt;/script&gt;<br>
+            &lt;text-in-heart&gt;Some Text on a heart&lt;/text-in-heart&gt;
+          </code>
+      </div>
+    </details>
+  </p>
+
+  <p id="options">
+    <label>
+      Size:<br>
+      <input type="range" min="0" max="100" oninput="change(event, 'size')"><br>
+      <span id="shape-size"></span>
+    </label>
+
+    <label>
+      Fill:<br>
+      <select onchange="change(event, 'fill')">
+        <option value="">Default</option>
+        <option>orange</option>
+        <option>#ff5f00</option>
+        <option>hsl(89.75, 100%, 50%)</option>
+        <option>rgb(0, 161.77, 255)</option>
+        <option>oklch(0.52642 0.29298 292.73)</option>
+      </select>
+    </label>
+
+    <label>
+      Stroke:<br>
+      <select onchange="change(event, 'stroke')">
+        <option value="">Default</option>
+        <option>orange</option>
+        <option>#ff5f00</option>
+        <option>hsl(89.75, 100%, 50%)</option>
+        <option>rgb(0, 161.77, 255)</option>
+        <option>oklch(0.52642 0.29298 292.73)</option>
+      </select>
+    </label>
+
+    <label>
+    	Inset:<br>
+    	<select onchange="change(event, 'inset')">
+    		<option value="">Default</option>
+    		<option>0</option>
+    		<option>20px</option>
+    		<option>50px</option>
+    	</select>
+    </label>
+
+    <label>
+    	Text:<br>
+    	<input oninput="change(event, 'text')">
+    </label>
+  </p>
+
+  <style>
+  	foo { color: #ff5f00 }
+  </style>
+	<div id="container">
+		<text-in-heart>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		</text-in-heart>
+	</div>
+
+	<script>
+    function change(evt, attr) {
+      const el = document.querySelector('text-in-heart');
+      switch (attr) {
+        case 'size':
+        	const size = evt.target.value + '%'
+          el.style.width = size;
+          document.querySelector('#shape-size').innerText = size;
+          break;
+        default:
+          el.setAttribute(attr, evt.target.value);
+          // console.log(attr, el.getAttribute(attr));
+      }
+    }
+  </script>
+</body>
+</html>
