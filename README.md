@@ -10,4 +10,4 @@ Renders text inside a heart.
 ## Usage
 
 <script defer type="module" src="text-in-heart.js"></script>
-<text-in-heart>Some Text on a heart</text-in-heart>
+%lt;text-in-heart&gt;Some Text on a heart&lt;/text-in-heart&gt;
