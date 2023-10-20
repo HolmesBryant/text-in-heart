@@ -1,4 +1,4 @@
-# Text In Heart Component
+# Text In Heart Web Component
 
 Renders text inside a heart.
 

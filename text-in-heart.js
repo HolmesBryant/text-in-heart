@@ -1,7 +1,24 @@
+/**
+ *  Renders text inside a heart
+ *
+ *  @author Holmes Bryant <webbmaastaa@gmail.com>
+ *  @license GPL-3.0
+ *
+ *  @attribute [fill] optional (default: "none") The color of the inside of the shape.
+ *  @attribute [stroke] optional (default: "gray") The color of the line around the shape.
+ *  @attribute [strokewidth] optional (default: "1px") The width of the line around the shape.
+ *  @attribute [inset] optional (default: "10px") The spacing between the text and the shape boundry.
+ *  @attribute [textcolor] optional (default: "inherit") The color of the text.
+ *  @attribute [text] optional (default: null) The text to place inside the shape. This is used for dynamically changing the text with javascript. For normal usage, just place the text inside the tag.
+ *
+ *  @usage
+ *  	<script type="module" src="text-in-heart.js"></script>
+ *  	<text-in-heart>a short paragraph of text</text-in-heart>
+ */
 class TextInHeart extends HTMLElement {
 	shadow = ShadowRoot;
 	#fill = 'none';
-	#stroke = 'rgb(100,100,100)';
+	#stroke = 'gray';
 	#strokewidth="1px";
 	#inset = '10px';
 	#textcolor = 'inherit';
