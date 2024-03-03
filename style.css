@@ -9,9 +9,10 @@ body {
   font-size: 16px;
 }
 
-h1, h2, h3 {
+h1 {
   display: inline-block;
   margin: 0;
+  vertical-align: center;
 }
 
 summary { cursor: pointer; }

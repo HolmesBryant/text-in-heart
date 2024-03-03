@@ -1,34 +1,71 @@
 /**
- *  Renders text inside a heart
+ * A custom web component that displays text inside a heart shape.
+ * @extends HTMLElement
+ * @author Holmes Bryant <https://github.com/HolmesBryant>
+ * @license GPL-3.0
  *
- *  @author Holmes Bryant <webbmaastaa@gmail.com>
- *  @license GPL-3.0
- *
- *  @attribute [fill] optional (default: "none") The color of the inside of the shape.
- *  @attribute [stroke] optional (default: "gray") The color of the line around the shape.
- *  @attribute [strokewidth] optional (default: "1px") The width of the line around the shape.
- *  @attribute [inset] optional (default: "10px") The spacing between the text and the shape boundry.
- *  @attribute [textcolor] optional (default: "inherit") The color of the text.
- *  @attribute [text] optional (default: null) The text to place inside the shape. This is used for dynamically changing the text with javascript. For normal usage, just place the text inside the tag.
- *
- *  @usage
- *  	<script type="module" src="text-in-heart.js"></script>
- *  	<text-in-heart>a short paragraph of text</text-in-heart>
+ * @attribute [fill] optional (default: "none") The color of the inside of the shape.
+ * @attribute [stroke] optional (default: "gray") The color of the line around the shape.
+ * @attribute [strokewidth] optional (default: "1px") The width of the line around the shape.
+ * @attribute [inset] optional (default: "10px") The spacing between the text and the shape boundry.
+ * @attribute [textcolor] optional (default: "inherit") The color of the text.
+ * @attribute [text] optional (default: null) The text to place inside the shape. This is used for dynamically changing the text with javascript. For normal usage, just place the text inside the tag.
+
+ * @usage
+ * 	<script type="module" src="text-in-heart.js"></script>
+ * 	<text-in-heart>a short paragraph of text</text-in-heart>
  */
 class TextInHeart extends HTMLElement {
-	shadow = ShadowRoot;
+	/**
+	 * The fill color of the heart shape.
+	 * @private
+	 * @type {string}
+	 */
 	#fill = 'none';
+
+	/**
+	 * The stroke color of the heart shape.
+	 * @private
+	 * @type {string}
+	 */
 	#stroke = 'gray';
+
+	/**
+	 * The width of the stroke line.
+	 * @private
+	 * @type {string}
+	 */
 	#strokewidth="1px";
+
+	/**
+	 * The inset value for the heart shape.
+	 * @private
+	 * @type {string}
+	 */
 	#inset = '10px';
+
+	/**
+	 * The color of the text.
+	 * @private
+	 * @type {string}
+	 */
 	#textcolor = 'inherit';
+
+	/**
+	 * The text content to be displayed inside the heart.
+	 * @private
+	 * @type {string}
+	 */
 	#text;
 	static observedAttributes = ['fill', 'stroke', 'inset', 'textcolor', 'text'];
 
+	/**
+	 * Constructor
+	 */
 	constructor() {
 		super();
-		this.shadow = this.attachShadow({mode: 'open'});
-		this.shadow.innerHTML =  `
+		this.attachShadow({mode: 'open'});
+		this.shadowRoot.innerHTML =  `
 			<style>
 				:host {
 					aspect-ratio: 1/1;
@@ -110,6 +147,9 @@ class TextInHeart extends HTMLElement {
 			`;
 	}
 
+	/**
+	 * Called when element is inserted into the DOM
+	 */
 	connectedCallback() {
 		this.fill = this.getAttribute('fill') || this.fill;
 		this.stroke = this.getAttribute('stroke') || this.stroke;
@@ -118,55 +158,96 @@ class TextInHeart extends HTMLElement {
 		this.textColor = this.getAttribute('textColor') || this.textColor;
 	}
 
+	/**
+	 * Called when an observed attribute changes
+	 * @param  {string} attr   The attribute name
+	 * @param  {string} oldval The old value
+	 * @param  {string} newval The new value
+	 */
 	attributeChangedCallback(attr, oldval, newval) {
-		// console.log(attr, newval);
         this[attr] = newval;
     }
 
+	/**
+	 * Get the fill property
+	 * @returns {string} A color value
+	 */
 	get fill() { return this.#fill; }
 
+	/**
+	 * Set the fill property
+	 * @param  {string} value A valid css color value;
+	 */
 	set fill(value) {
 		if (!value) value = 'none';
 		this.#fill = value;
-		const el = this.shadow.querySelector('svg > path');
+		const el = this.shadowRoot.querySelector('svg > path');
 		if (el)  el.style.fill = value;
 	}
 
+	/**
+	 * Gets the stroke (color) value
+	 * @returns {string} A css length value;
+	 */
 	get stroke() { return this.#stroke; }
 
+	/**
+	 * Sets the value of the stroke property
+	 * @param  {string} value A valid css color value
+	 */
 	set stroke(value) {
 		if (!value) value = 'rgb(100,100,100)';
 		this.#stroke = value;
-		const el = this.shadow.querySelector('svg > path');
+		const el = this.shadowRoot.querySelector('svg > path');
 		if (el)  el.style.stroke = value;
 	}
 
+	/**
+	 * Gets the strokeWidth value
+	 * @returns {string} A css <length> value
+	 */
 	get strokewidth() { return this.#strokewidth; }
 
+	/**
+	 * Sets the strokeWidth value
+	 * @param  {string} value A valid css <length> value
+	 */
 	set strokewidth(value) {
 		if (!value) value = '1px';
 		this.#strokewidth = value;
-		const el = this.shadow.querySelector('path');
+		const el = this.shadowRoot.querySelector('path');
 		el.style.strokeWidth = value;
 	}
 
+	/**
+	 * Gets the inset value
+	 * @returns {string} A css <length> value
+	 */
 	get inset() { return this.#inset; }
 
+	/**
+	 * Sets the inset value
+	 * @param  {string} value A valid css <length> value
+	 */
 	set inset(value) {
 		if (!value) value = '10px';
 		this.#inset = value;
-		const elem1 = this.shadow.querySelector('.heart-left');
-		const elem2 = this.shadow.querySelector('.heart-right');
+		const elem1 = this.shadowRoot.querySelector('.heart-left');
+		const elem2 = this.shadowRoot.querySelector('.heart-right');
 		elem1.style.shapeMargin = elem2.style.shapeMargin = value;
 	}
 
+	/**
+	 * Gets the text value
+	 * @return {string} A string of text
+	 */
 	get text() { return this.#text; }
 
 	set text(value) {
 		if (!value) return;
 		this.#text = value;
-		const el = this.shadow.querySelector('span');
-		el.innerText = value;
+		const el = this.shadowRoot.querySelector('span');
+		el.textContent = value;
 	}
 }
 
