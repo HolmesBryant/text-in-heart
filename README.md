@@ -14,5 +14,5 @@ Demo: (https://holmesbryant.github.io/text-in-heart/)
 
 ## Usage
 
-	<script defer type="module" src="text-in-heart.js"></script>
+	<script type="module" src="text-in-heart.js"></script>
 	<text-in-heart>A short paragraph of text</text-in-heart>

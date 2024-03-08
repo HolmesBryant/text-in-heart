@@ -15,7 +15,7 @@
  * 	<script type="module" src="text-in-heart.js"></script>
  * 	<text-in-heart>a short paragraph of text</text-in-heart>
  */
-class TextInHeart extends HTMLElement {
+export class TextInHeart extends HTMLElement {
 	/**
 	 * The fill color of the heart shape.
 	 * @private
