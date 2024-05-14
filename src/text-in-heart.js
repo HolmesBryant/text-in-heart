@@ -251,4 +251,8 @@ export class TextInHeart extends HTMLElement {
 	}
 }
 
-document.addEventListener('DOMContentLoaded', customElements.define('text-in-heart', TextInHeart));
+document.addEventListener('DOMContentLoaded', () => {
+	if (!customElements.get('text-in-heart')) {
+		customElements.define('text-in-heart', TextInHeart);
+	}
+});
